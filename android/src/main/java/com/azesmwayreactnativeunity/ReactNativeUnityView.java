@@ -6,6 +6,7 @@ import android.content.Context;
 
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
+import android.util.Log;
 import android.widget.FrameLayout;
 
 import java.lang.reflect.InvocationTargetException;
@@ -56,16 +57,16 @@ public class ReactNativeUnityView extends FrameLayout {
     }
   }
 
-  @Override
-  protected void onDetachedFromWindow() {
-    if (!this.keepPlayerMounted) {
-        try {
-            addUnityViewToBackground();
-        } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-    super.onDetachedFromWindow();
-  }
+//   @Override
+//   protected void onDetachedFromWindow() {
+//     if (!this.keepPlayerMounted) {
+//         try {
+//             addUnityViewToBackground();
+//         } catch (InvocationTargetException | NoSuchMethodException | IllegalAccessException e) {
+//             throw new RuntimeException(e);
+//         }
+//     }
+//
+//     super.onDetachedFromWindow();
+//   }
 }

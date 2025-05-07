@@ -3,6 +3,7 @@ package com.azesmwayreactnativeunity;
 import static com.azesmwayreactnativeunity.ReactNativeUnity.*;
 
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -22,6 +23,7 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 import java.util.Map;
 
 @ReactModule(name = ReactNativeUnityViewManager.NAME)
@@ -115,7 +117,8 @@ public class ReactNativeUnityViewManager extends ReactNativeUnityViewManagerSpec
         pauseUnity(view, args.getBoolean(0));
         return;
       case "resumeUnity":
-        resumeUnity(view);
+        onHostPause();
+        onHostResume();
         return;
       case "windowFocusChanged":
         assert args != null;
@@ -192,10 +195,6 @@ public class ReactNativeUnityViewManager extends ReactNativeUnityViewManagerSpec
 
   @Override
   public void onHostDestroy() {
-    if (isUnityReady()) {
-      assert getPlayer() != null;
-      getPlayer().destroy();
-    }
   }
 
   private void restoreUnityUserState() {

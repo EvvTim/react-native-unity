@@ -8,6 +8,17 @@ type UnityViewContentUpdateEvent = Readonly<{
   message: string;
 }>;
 
+export type RNUnityMethods = {
+  postMessage: (
+    gameObject: string,
+    methodName: string,
+    message: string) => void
+  unloadUnity: () => void
+  pauseUnity: (pause: boolean) => void
+  resumeUnity: () => void
+  windowFocusChanged: (hasFocus: boolean) => void
+}
+
 type RNUnityViewProps = {
   androidKeepPlayerMounted?: boolean;
   fullScreen?: boolean;
@@ -63,11 +74,11 @@ export default class UnityView extends React.Component<RNUnityViewProps> {
     };
   }
 
-  componentWillUnmount() {
-    if (this.ref.current) {
-      Commands.unloadUnity(this.ref.current);
-    }
-  }
+  // componentWillUnmount() {
+  //   if (this.ref.current) {
+  //     Commands.unloadUnity(this.ref.current);
+  //   }
+  // }
 
   render() {
     return <NativeUnityView ref={this.ref} {...this.getProps()} />;
